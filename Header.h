@@ -1,13 +1,8 @@
 #pragma once
 
 #include<iostream>
-#include<cstdio>
-#include<cstdlib>
-#include<ostream>
 #include <stdio.h>
 #include <string>
-#include <iomanip> //remove for submission
-#include <vector>
 
 struct node
 {
@@ -94,9 +89,6 @@ public:
 		struct trnode *right;
 	};
 
-	//struct trnode *root = NULL;
-
-
 	trnode * newnode(std::string &str, int &value) {
 		struct trnode *temp = new(struct trnode);
 		temp->key = str;
@@ -124,13 +116,6 @@ public:
 	}
 
 	trnode* insert(trnode* root, std::string &word, int num) {
-		//trnode* n = new trnode;
-		//trnode* idx = new trnode;
-		//n->left = NULL;
-		//n->right = NULL;
-		//n->key = word;
-
-		//idx = root;
 		if (!(search(word, root, num))) {
 			if (root == NULL) {
 				root = newnode(word, num);
@@ -143,11 +128,11 @@ public:
 		}
 	}
 
-	void print(trnode* root/*, int indent*/) {
+	void print(trnode* root, int indent) {
+		int x;
 		if (root != NULL) {
-			if (root->left) print(root->left);
-			if (root->right) print(root->right);
-			int x = 10 - (root->key.length());
+			if (root->left) print(root->left,0);
+			x = 10 - (root->key.length());
 			std::cout << root->key << " ";
 			while (x > 0) {
 				std::cout << " ";
@@ -155,20 +140,8 @@ public:
 			}
 			root->list.reverse();
 			root->list.display();
+			if (root->right) print(root->right,0);
+
 		}
-		//if (p != NULL) {
-		//	if (p->right) {
-		//		print(p->right, indent + 4);
-		//	}
-		//	if (indent) {
-		//		std::cout << std::setw(indent) << ' ';
-		//	}
-		//	if (p->right) std::cout << " /\n" << std::setw(indent) << ' ';
-		//	std::cout << p->key << "\n ";
-		//	if (p->left) {
-		//		std::cout << std::setw(indent) << ' ' << " \\\n";
-		//		print(p->left, indent + 4);
-		//	}
-		//}
 	}
 };
