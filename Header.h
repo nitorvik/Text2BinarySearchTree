@@ -1,5 +1,3 @@
-//#pragma once
-
 #include<iostream>
 #include <stdio.h>
 #include <string>
@@ -115,31 +113,31 @@ public:
 	}
 
 	trnode* insert(trnode* root, std::string &word, int num) { //insert function, used to search/check if a word exists already in the BST, then creates a new node
-		if (!(search(word, root, num))) {
+		if (!(search(word, root, num))) {  
 			if (root == NULL) {
-				root = newnode(word, num);
+				root = newnode(word, num); //create the root node if root == NULL
 				return root;
 			}
-			if (word < root->key) root->left = insert(root->left, word, num);
-			else if (word > root->key) root->right = insert(root->right, word, num);
+			if (word < root->key) root->left = insert(root->left, word, num); //compare the word passed to the function, if it is less alphabetically, move to the left child
+			else if (word > root->key) root->right = insert(root->right, word, num);//if it is greater than alphabetically, move to the right child recursively
 
-			return root;
+			return root; //return the root to be kept track of
 		}
 	}
 
-	void print(trnode* root, int indent) {
+	void print(trnode* root, int indent) { //function to print the formatted output
 		int x;
-		if (root != NULL) {
-			if (root->left) print(root->left,0);
-			x = 10 - (root->key.length());
-			std::cout << root->key << " ";
-			while (x > 0) {
+		if (root != NULL) { 
+			if (root->left) print(root->left,0); //if there is a left child, print it, call function recursively
+			x = 10 - (root->key.length()); //subtraction to line up the linked lists
+			std::cout << root->key << " "; //add a a space after the word being printed
+			while (x > 0) {  //add number of spaces to line up the text file line numbers
 				std::cout << " ";
 				x--;
 			}
-			root->list.reverse();
-			root->list.display();
-			if (root->right) print(root->right,0);
+			root->list.reverse(); //reverse the linked list to diaply properly
+			root->list.display(); //print the linked list containing the line numbers
+			if (root->right) print(root->right,0); //print the right node, call recursively
 
 		}
 	}
